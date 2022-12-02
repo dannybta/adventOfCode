@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>p {
+            color: navy;
+            text-indent: 30px;
+            text-transform: uppercase;
+          }</style>
+    </head>
+    <body>
+        <div><script>
+           ( async () => {
+                const input = await fetch('input.txt')
+                const text = await input.text()
+                const arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
+                    .map(food=>food.split('\r\n')
+                    .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
+                const answer1= Math.max(...arrayTotalCalories)
+                document.getElementById("answer1").innerHTML = answer1
+                const answer2 = arrayTotalCalories.sort((a,b)=>b-a)
+                document.getElementById("answer2").innerHTML =answer2.slice(0,3).reduce((a,b) => parseInt(a) + parseInt(b) , 0)
+            })()
+        </script></div>
+        <p>First answer</p>
+        <p id="answer1"></p>
+        <p>Second answer</p>
+        <p id="answer2"></p>
+    </body>
+</html>
