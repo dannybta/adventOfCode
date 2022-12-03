@@ -22,9 +22,18 @@
                  const reader = await input.body.getReader()
                  const readUTF8 =await reader.read()
                  const text = new TextDecoder("utf-8").decode(readUTF8.value);
-                 const arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
+                 let arrayTotalCalories=[]
+                 if(text.includes('\r'))
+                 {
+                    arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
                      .map(food=>food.split('\r\n')
                      .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
+                }
+                else{
+                     arrayTotalCalories=text.replaceAll('\n\n', ",").split(",")
+                     .map(food=>food.split('\n')
+                     .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
+                }
                  const answer1= Math.max(...arrayTotalCalories)
                  document.getElementById("answer1").innerHTML = answer1
                  const answer2 = arrayTotalCalories.sort((a,b)=>b-a)
