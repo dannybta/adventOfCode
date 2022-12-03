@@ -4,15 +4,24 @@
         <style>p {
             color: navy;
             text-indent: 30px;
-          }</style>
+          }
+          body {
+        background-color: #f1f1f1;
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+          </style>
         <div></div>
     </head>
     <body>
         <button onclick="runChallenge()">Run solution</button>
         <script async>
             async function runChallenge  () {
+
                  const input = await fetch('input.txt')
-                 const text = await input.text()
+                 const reader = await input.body.getReader()
+                 const readUTF8 =await reader.read()
+                 const text = new TextDecoder("utf-8").decode(readUTF8.value);
                  const arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
                      .map(food=>food.split('\r\n')
                      .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
