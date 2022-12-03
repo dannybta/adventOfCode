@@ -5,23 +5,24 @@
             color: navy;
             text-indent: 30px;
           }</style>
-        <div><script async>
-           ( async () => {
-                const input = await fetch('input.txt')
-                const text = await input.text()
-                const arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
-                    .map(food=>food.split('\r\n')
-                    .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
-                const answer1= Math.max(...arrayTotalCalories)
-                document.getElementById("answer1").innerHTML = answer1
-                const answer2 = arrayTotalCalories.sort((a,b)=>b-a)
-                document.getElementById("answer2").innerHTML =answer2.slice(0,3).reduce((a,b) => parseInt(a) + parseInt(b) , 0)
-               console.log(arrayTotalCalories)
-            })()
-        </script></div>
+        <div></div>
     </head>
     <body>
-        
+        <button onclick="runChallenge()">Run solution</button>
+        <script async>
+            async function runChallenge  () {
+                 const input = await fetch('input.txt')
+                 const text = await input.text()
+                 const arrayTotalCalories=text.replaceAll('\r\n\r\n', ",").split(",")
+                     .map(food=>food.split('\r\n')
+                     .reduce((a,b) => parseInt(a) + parseInt(b) , 0))
+                 const answer1= Math.max(...arrayTotalCalories)
+                 document.getElementById("answer1").innerHTML = answer1
+                 const answer2 = arrayTotalCalories.sort((a,b)=>b-a)
+                 document.getElementById("answer2").innerHTML =answer2.slice(0,3).reduce((a,b) => parseInt(a) + parseInt(b) , 0)
+                console.log(arrayTotalCalories)
+             }
+         </script>
         <p>First answer</p>
         <p id="answer1"></p>
         <p>Second answer</p>
