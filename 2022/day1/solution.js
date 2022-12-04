@@ -12,6 +12,6 @@ async function runChallenge() {
             .reduce((a, b) => parseInt(a) + parseInt(b), 0))
 
     document.getElementById("answer1").innerHTML = Math.max(0, ...arrayTotalCalories)
-    document.getElementById("answer2").innerHTML = answer2.slice(0, 3).reduce((a, b) => parseInt(a) + parseInt(b), 0)
+    document.getElementById("answer2").innerHTML = arrayTotalCalories.sort((a, b) => b - a).slice(0, 3).reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
 }
